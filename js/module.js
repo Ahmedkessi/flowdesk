@@ -64,9 +64,8 @@ export function checkRegistForm(data, where) {
     if (data.name && data.image.name && data.gender && data.birthdate && data.about) return 'Register completed';
 
   } if (where === 'category') {
-      if (!data?.image.name) return 'enter your image';
     if (!data?.name) return 'please fill the name';
-    if (data.name && data.image.name) return 'Register completed';
+    if (data.name) return 'Register completed';
   }
 }
 
