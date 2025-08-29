@@ -98,9 +98,8 @@ function categoryAdder(data) {
   //completed form
   if (msg === 'Register completed') {
     module.addCategory(data);
-
+    updateRender();
     setTimeout(() => { 
-      updateRender();
       window.location.reload()
     }, 1500);
   }
