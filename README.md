@@ -40,8 +40,7 @@ A **React-powered version (v2)** is coming soon!
 - Displays tasks by the month they were created.  
 
 ✅ **Profile Page**  
-- Shows user summary like:  
-  `Ahmed is a web developer, a man who is 17 years old.`  
+- Shows user Data. 
 
 ✅ **Logout Feature**  
 - Clears all data and redirects back to **Register Page**.  
@@ -57,12 +56,23 @@ A **React-powered version (v2)** is coming soon!
 ---
 
 ## 📸 Screenshots
+###Dashboard Page
+![Dashboard](images/dashboard.PNG)
 ![Dashboard](images/dashboard.png)
 
 ### Category Page
-![Categories](images/categories.png)
+![Categories](images/categoies.PNG)
+![Category details](images/categoryDeatils.PNG)
+
+### Profile Page
+![Profile](images/profile.PNG)
+
+### Task Page
+![Tasks](images/tasks.PNG)
+![Task details](images/taskView.PNG)
+
 
 ---
 
-## 🛠 Take Look at the project
+## 🛠 Live Demo
    https://flowdesk-v1.netlify.app/
