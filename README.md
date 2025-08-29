@@ -5,7 +5,7 @@
 
 ## 🚀 About FlowDesk
 FlowDesk is a modern task management dashboard that helps users stay organized with categories, tasks, and notifications.
-Built using **vanilla JavaScript** for learning purposes, this is the **first version** of the app.
+Built using **vanilla JavaScript** this is the **first version** of the app.
 A **React-powered version (v2)** is coming soon!  
 
 ---
