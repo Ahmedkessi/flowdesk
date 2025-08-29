@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flow Desk</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="icon" href="images/FlowDesk_Logo.png">
+  
+  <script defer type="module" src="js/controller.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+
+    <!--Animation page-->
+    <div class="animation-page">
+      <div class="loader">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      </div>
+    </div>
+
+    <!--Register page-->
+    <div class="register">
+      <div class="logo-box">
+        <img src="images/FlowDesk_Logo.png" alt="logo_image" class="logo_image">
+      </div>
+      <form action="#" class="register__form">
+        <div class="img-box">
+          <input type="file" class="upload-image" name="image">
+          <svg  class="regist-img"><use href="icons.svg#icon-add"></use></svg>
+          <img src="" alt="user_image" class="uploaded-image">
+        </div>
+        <input type="text" class="username-input" placeholder="Enter your name" name="name">
+        
+        <div class="option--info">
+          <div class="radio">
+            <div class="radio__box">
+              <input type="radio" id="male" name="gender" value="male">
+              <label for="male">Male</label>
+            </div>
+
+            <div class="radio__box">
+              <input type="radio" id="female" name="gender" value="female">
+              <label for="female">Female</label>
+            </div>
+          </div>
+
+        <div class="birthdate-box">
+          <label for="date">birthdate</label>
+          <input type="date" id="date" class="birthdate" placeholder="birthdate" name="birthdate">
+        </div>
+        </div>
+
+        <textarea name="about" class="about-user" placeholder="E.g Student" maxlength="15"></textarea>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <!--main app-->
+    <main class="application" >
+      <!--whole page-->
+      <div class="back-page">
+
+      <div class="nav">
+        <nav class="navigation">
+          <div class="logo-box logo-app">
+            <img src="images/FlowDesk_Logo.png" alt="logo_image" class="logo_image">
+            <p class="local-date">24-Aug-2025</p>
+          </div>
+
+          <div class="middle-nav">
+            <div class="search-box">
+              <input type="text" class="search-task" placeholder="Search task">
+              <svg class="search"><use href="icons.svg#icon-search"></use></svg>
+            </div>
+            <div class="filter-box">
+              <svg class="filter"><use href="icons.svg#icon-filter"></use></svg>
+              <div class="filter-options">
+                <p class="by-date">by date</p>
+                <p class="by-name">by name</p>
+                <p class="by-category">by category</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-nav">
+            <div class="msg-box caller call-1">
+              <p class="msg-num">0</p>
+              <svg><use href="icons.svg#icon-notification"></use></svg>
+            </div>
+
+
+            <div class="user-intro icon" data-ln= '1'>
+              <img src="images/Color pallet.png" alt="user_image" class="intro__user-image">
+              <p class="intro__user-name">user name</p>
+              <p class="intro__user-about">student</p>
+            </div>
+            </div>
+        
+        </nav>
+      </div>
+
+      <div class="side-bar">
+        <div class="icons-side">
+          <div class="icon" data-ln= '1'>
+              <svg class="icon-svg"><use href="icons.svg#icon-profile"></use></svg>
+          </div>
+
+          <div class="icon" data-ln= '2'>
+          <svg class="icon-svg"><use href="icons.svg#icon-home"></use></svg>
+          </div>
+
+          <div class="icon" data-ln= '4'>
+          <svg class="icon-svg"><use href="icons.svg#icon-category"></use></svg>
+          </div>
+
+          <div class="icon" data-ln= '5'>
+          <svg class="icon-svg"><use href="icons.svg#icon-task"></use></svg>
+          </div>
+
+          <div class="icon logout" data-ln= '3'>
+            <svg class="icon-svg"><use href="icons.svg#icon-logout"></use></svg>
+          </div>
+
+        <div class="icon close-page">
+        <svg class="icon-svg"><use href="icons.svg#icon-close"></use></svg>
+        </div>
+
+        </div>
+
+        <div class="links-side">
+          <p class="link__profile link-1 link">Profile</p>
+          <p class="link__dashboard link-2 link">Dashboard</p>
+          <p class="link__category link-4 link">Category</p>
+          <p class="link__task link-5 link">Tasks</p>
+          <p class="link__setting link-3 link">LogOut</p>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="pages">
+        <div class="page page-1 profile-page hidden">
+          <div class="back">
+            <svg><use href="icons.svg#icon-arrow-left"></use></svg>
+            <h2>Profile</h2>
+          </div>
+
+          <div class="profile-info">
+
+          </div>
+        </div>
+
+        <div class="page page-2 dashboard-page">
+          <div class="dashboard__header">
+            <h1 class="welcome">Welcome, <span class="guest">Guest!</span></h1>
+            
+            <h2 class="welcome_date">
+              <span class="welcome--day">Thursday</span>
+              <span class="welcome--time">8:48pm</span>
+            </h2>
+          </div>
+
+          <div class="dashboard__main">
+
+            <div class="report">
+              <div class="report__level">
+                <div class="in-box">
+                  <svg><use href="icons.svg#icon-star"></use></svg>
+                  <p class="level-total">0</p>
+                </div>
+                <p class="report--name">Level</p>
+              </div>
+
+              <div class="report__category">
+                <div class="in-box">
+                  <svg><use href="icons.svg#icon-category"></use></svg>
+                  <p class="category-total">0</p>
+                </div>
+                <p class="report--name">Category</p>
+                <div class="track-box">
+                  <div class="track"></div>
+                </div>
+              </div>
+
+              <div class="report__tasks">
+                <div class="in-box">
+                  <svg><use href="icons.svg#icon-task"></use></svg>
+                  <p class="task-total">0</p>
+                </div>
+                <p class="report--name">Task</p>
+                <div class="track-box">
+                  <div class="track"></div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="usefull-category">
+              <p class="top-categories">Top categories</p>
+
+              <div class="usefull-boxes">
+
+                <svg class="left-category"><use href="icons.svg#icon-arrow-left"></use></svg>
+
+                <svg class="right-category"><use href="icons.svg#icon-arrow-right"></use></svg>
+
+                <div class="category-card caller slide-card call-1">
+                  <img class="category__img" src="images/Color pallet.png" alt="category-image">
+
+                  <div class="category__name">Category</div>
+                  <div class="category__total">0</div>
+                </div>
+
+                  <div class="category-card caller slide-card call-1">
+                  <img class="category__img" src="images/Color pallet.png" alt="category-image">
+
+                  <div class="category__name">Category</div>
+                  <div class="category__total">0</div>
+                </div>
+
+                    <div class="category-card caller slide-card call-1">
+                  <img class="category__img" src="images/Color pallet.png" alt="category-image">
+
+                  <div class="category__name">Category</div>
+                  <div class="category__total">0</div>
+                </div>
+
+                   <div class="category-card caller slide-card call-1">
+                  <img class="category__img" src="images/Color pallet.png" alt="category-image">
+
+                  <div class="category__name">Category</div>
+                  <div class="category__total">0</div>
+                </div>
+
+                   <div class="category-card caller slide-card call-1">
+                  <img class="category__img" src="images/Color pallet.png" alt="category-image">
+
+                  <div class="category__name">Category</div>
+                  <div class="category__total">0</div>
+                </div>
+
+                   <div class="category-card caller slide-card call-1">
+                  <img class="category__img" src="images/Color pallet.png" alt="category-image">
+
+                  <div class="category__name">Category</div>
+                  <div class="category__total">0</div>
+                </div>
+
+                   <div class="category-card caller slide-card call-1">
+                  <img class="category__img" src="images/Color pallet.png" alt="category-image">
+
+                  <div class="category__name">Category</div>
+                  <div class="category__total">0</div>
+                </div>
+
+                   <div class="category-card caller slide-card call-1">
+                  <img class="category__img" src="images/Color pallet.png" alt="category-image">
+
+                  <div class="category__name">Category</div>
+                  <div class="category__total">0</div>
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="newest-tasks">
+              <p>Newest Tasks</p>
+              <div class="tasks-header">
+                <p class="category--header category--name">category</p>
+                <p class="category--header">category</p>
+                <p class="category--header">category</p>
+                <p class="category--header">category</p>
+                <p class="category--header">category</p>
+              </div>
+
+              <div class="tasks-main">
+
+                <div class="item caller call-2">
+                <div class="task-color"></div>
+                <p class="task-name">Todo task</p>
+                <p class="task-status">Status</p>
+                <p class="task-date">25-Aug-2025</p>
+
+                <div class="list-icon">
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
+              </div>
+
+              <div class="item caller call-2">
+                <div class="task-color"></div>
+                <p class="task-name">Todo task</p>
+                <p class="task-status">Status</p>
+                <p class="task-date">25-Aug-2025</p>
+
+                <div class="list-icon">
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
+              </div>
+
+              <div class="item caller call-2">
+                <div class="task-color"></div>
+                <p class="task-name">Todo task</p>
+                <p class="task-status">Status</p>
+                <p class="task-date">25-Aug-2025</p>
+
+                <div class="list-icon">
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
+              </div>
+
+              <div class="item caller call-2">
+                <div class="task-color"></div>
+                <p class="task-name">Todo task</p>
+                <p class="task-status">Status</p>
+                <p class="task-date">25-Aug-2025</p>
+
+                <div class="list-icon">
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
+              </div>
+
+              <div class="item caller call-2">
+                <div class="task-color"></div>
+                <p class="task-name">Todo task</p>
+                <p class="task-status">Status</p>
+                <p class="task-date">25-Aug-2025</p>
+
+                <div class="list-icon">
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
+              </div>
+
+              </div>
+            </div>
+
+            <div class="transactions">
+              <p class="transaction-head">Transactions</p>
+              <p class="transaction-text">Any transactions that happen in each month.</p>
+              <div class="transaction__items">
+                <p class="tr__date Jan caller call-1">Jan</p>
+                <p class="tr__date Feb caller call-1">Feb</p>
+                <p class="tr__date Mar caller call-1">Mar</p>
+                <p class="tr__date Apr caller call-1">Apr</p>
+                <p class="tr__date May caller call-1">May</p>
+                <p class="tr__date Jun caller call-1">Jun</p>
+                <p class="tr__date July caller call-1">Jul</p>
+                <p class="tr__date Aug caller call-1">Aug</p>
+                <p class="tr__date Sep caller call-1">Sep</p>
+                <p class="tr__date Oct caller call-1">Oct</p>
+                <p class="tr__date Nov caller call-1">Nov</p>
+                <p class="tr__date Dec caller call-1">Dec</p>
+              </div>
+            </div>
+
+            <div class="status">
+              <p class="status__header">Status</p>
+              <div class="graphs">
+
+                <div class="graph caller call-1">
+                  <div class="graph__in-box">
+                    <svg><use href="icons.svg#icon-refresh"></use></svg>
+                    <p class="graph__num">0</p>
+                    <div class="track-box">
+                      <div class="graph-track">
+                        <div class="track" style="width: 50%;"></div>
+                      </div>
+                      <div class="track-num">0%</div>
+                    </div>
+                  </div>
+                  <p class="graph__name">inprocess</p>
+                </div>
+
+                <div class="graph caller call-1">
+                  <div class="graph__in-box">
+                    <svg><use href="icons.svg#icon-lock"></use></svg>
+                    <p class="graph__num">0</p>
+                    <div class="track-box">
+                      <div class="graph-track">
+                        <div class="track"></div>
+                      </div>
+                      <div class="track-num">0%</div>
+                    </div>
+                  </div>
+                  <p class="graph__name">not started</p>
+                </div>
+
+                <div class="graph caller call-1">
+                  <div class="graph__in-box">
+                    <svg><use href="icons.svg#icon-task"></use></svg>
+                    <p class="graph__num">0</p>
+                    <div class="track-box">
+                      <div class="graph-track">
+                        <div class="track"></div>
+                      </div>
+                      <div class="track-num">0%</div>
+                    </div>
+                  </div>
+                  <p class="graph__name">completed</p>
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="page page-3 setting-page hidden"></div>
+
+        <div class="page page-4 category-page hidden">
+
+            <svg class="add-category"><use href="icons.svg#icon-add"></use></svg>
+          <div class="category-cards">
+
+          </div>
+        </div>
+
+        <div class="page page-5 tasks-page hidden">
+          <svg class="add-task"><use href="icons.svg#icon-add"></use></svg>
+          <div class="task-container">
+          <p class="tasks-intro">All tasks</p>
+
+            <div class="tasks-list">
+            </div>
+
+        </div>
+        </div>
+
+        <div class="caller-page caller-page-1">
+          <!--This page will use the item's data that clicked like month transactions or top categories-->
+          <div class="page-title">
+            <p class="page__heading">Category || Month</p>
+            <p class="page__text">Total: <span>0</span></p>
+          </div>
+          <svg class="close-call-page"><use href="icons.svg#icon-close"></use></svg>
+
+         <div class="main-page">
+
+            </div>
+        </div>
+
+        <div class="caller-page caller-page-2">
+          <!--This page will use the item's data that clicked like month transactions or top categories-->
+          <div class="page-title page-title-2">
+            <p class="page__heading">Task || Category</p>
+            <p class="page__text">Total: <span>0</span></p>
+          </div>
+          <svg class="close-call-page"><use href="icons.svg#icon-close"></use></svg>
+
+        <div class="main-page">
+              <!--The data-->  
+        <div class="main-page-2"></div>          
+
+            </div>
+        </div>
+
+          <div class="caller-page add-category-page">
+            <div class="page-title">
+              <p class="page__heading">Add Category</p>
+            </div>
+            <svg class="close-call-page"><use href="icons.svg#icon-close"></use></svg>
+
+            <div class="main-page">
+              <form action="#" class="submit-category form">
+                <div class="category-profile">
+                  <input type="file" class="upload-category-img" name="image">
+                  <svg class="upload-icon"><use href="icons.svg#icon-add"></use></svg>
+                  <img class="uploaded-category-img" src="" alt="category__image">
+                </div>
+
+                <input type="text" placeholder="Enter category name" class="add-category-name" name="name">
+
+
+                <div class="colorss">
+                    <div class="color">
+                      <input type="radio" name="color" value="#cc5ed4" class="radio">
+                      <div class="color-box" style="background-color: #cc5ed4;"></div>
+                    </div>
+
+                    <div class="color">
+                      <input type="radio" name="color" value="#52e0b6">
+                      <div class="color-box" style="background-color: #52e0b6;"></div>
+                    </div>
+
+                    <div class="color">
+                      <input type="radio" name="color" value="#6ba2cc">
+                      <div class="color-box" style="background-color: #6ba2cc;"></div>
+                    </div>
+
+                    <div class="color">
+                      <input type="radio" name="color" value="#9cd04e">
+                      <div class="color-box" style="background-color: #9cd04e;"></div>
+                    </div>
+
+                    <div class="color">
+                      <input type="radio" name="color" value="#cc7575">
+                      <div class="color-box" style="background-color: #cc7575;"></div>
+                    </div>
+
+                    <div class="color">
+                      <input type="radio" name="color" value="#8d90dd">
+                      <div class="color-box" style="background-color: #8d90dd;"></div>
+                    </div>
+
+                    <div class="color">
+                      <input type="radio" name="color" value="#ffa8a8">
+                      <div class="color-box" style="background-color: #ffa8a8;"></div>
+                    </div>
+
+                </div>
+                <button>Save</button>
+              </form>
+            </div>
+          </div>
+
+
+          <div class="caller-page add-task-page">
+          <div class="page-title">
+            <p class="page__heading">Add Task</p>
+          </div>
+          <svg class="close-call-page"><use href="icons.svg#icon-close"></use></svg>
+
+          <div class="main-page">
+            <form action="#" class="submit-task form">
+              <input type="text" class="add-task-name" placeholder="Enter task name" name="name">
+              
+                <select name="category" class="selected-value">
+                  <option value="choose" hidden>Choose category</option>
+                </select>
+
+                <input type="date" class="task-date-value" name="dueDate" title="enter due-date">
+  
+
+              <button>Save</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+    <div class="msg-box-page"></div>
+
+  </div>
+</body>
+</html>
