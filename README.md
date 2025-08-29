@@ -1,10 +1,10 @@
-# FlowDek - Task & Category Management App
+# FlowDesk - Task & Category Management App
 
 **Version:** 1.0  
 **Tech Stack:** HTML, CSS, Vanilla JavaScript, LocalStorage  
 
-## 🚀 About FlowDek
-FlowDek is a modern task management dashboard that helps users stay organized with categories, tasks, and notifications.
+## 🚀 About FlowDesk
+FlowDesk is a modern task management dashboard that helps users stay organized with categories, tasks, and notifications.
 Built using **vanilla JavaScript** for learning purposes, this is the **first version** of the app.
 A **React-powered version (v2)** is coming soon!  
 
