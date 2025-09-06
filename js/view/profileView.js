@@ -6,7 +6,7 @@ class ProfileView extends View {
   render(data) {
     const html = `
             <div class="profile__img-box">
-              <img src="${data.image}" alt="user_image">
+              <img src="${data.image}" alt="">
             </div>
 
             <div class="info">

@@ -7,8 +7,6 @@ class addCategoryView extends View {
   _uploadSvg = document.querySelector('.upload-icon');
   _imgForm = document.querySelector('.upload-category-img');
   imgFiles
-
-
 }
 
 export default new addCategoryView()

@@ -50,7 +50,7 @@ export function registData(data) {
   personData.userSummarise = userSumary(data);
   setTimeout(() => {
     saveToStorage();
-  }, 2000);
+  }, 1000);
 }
 
 export function checkRegistForm(data, where) {
@@ -64,11 +64,14 @@ export function checkRegistForm(data, where) {
     if (data.name && data.image.name && data.gender && data.birthdate && data.about) return 'Register completed';
 
   } if (where === 'category') {
-    if (!data?.name) return 'please fill the name';
-    if (data.name) return 'Register completed';
+    if (!data?.name) return "Enter Catgeory";
+    if (data.name) return 'Added ✔';
   }
 }
 
+document.addEventListener('click', () => {
+  console.log(personData)
+})
 
 
 
@@ -227,10 +230,9 @@ function addStatus(task) {
   task.status = statusName;
   const status = personData.data.Status;
   const prevTask = status[statusName].find(el => el.name === task.name);
+  console.log(prevTask)
   if (prevTask) return;
-
   status[statusName].push(task)
-  if (statusName === 'completed') personData.data.notifications = personData.data.Status.completed;
 }
 
 function addMonth(tasks) {
@@ -262,7 +264,7 @@ export function statusLoad() {
     status(task)
     addStatus(task);
   })
-  personData.data.notifications = personData.data.Status.completed
+  personData.data.notifications = personData.data.Status.inprocess
   levelUp(personData.data.categories);
   addMonth(personData.data.tasks)
   sortCategory()
@@ -415,9 +417,31 @@ export function deleteTask(name) {
   
   //////////REMOVING FROM THE NOTIFICATIONS
   const noteTask = personData.data.notifications.find(task => task.name === name);
-  const noteIndex = personData.data.notifications.findIndex(task => task.name === noteTask.name)
-  personData.data.notifications.splice(noteIndex, 1)
+  if (noteTask) {
+    const noteIndex = personData.data.notifications.findIndex(task => task.name === noteTask.name)
+    personData.data.notifications.splice(noteIndex, 1)
+  }
   /////////////////////////
+
+  /////////REMOVING FROM THE STATUS
+
+  const currStatus = personData.data.Status[task.status];
+
+    if (currStatus.length <= 0) return;
+    const status = currStatus.filter(item => {
+      return item.name === task.name
+    })
+
+    if (status.length <= 0) return;
+  const statusTasks = status[0];
+  console.log(statusTasks)
+
+
+    const index = personData.data.Status[task.status].findIndex(el => el.name === statusTasks.name);
+    personData.data.Status[task.status].splice(index, 1);
+
+  /////////////////////////
+
   saveToStorage();
 }
 

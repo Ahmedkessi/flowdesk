@@ -19,12 +19,11 @@ class categoryView extends View {
     this.parentEl.innerHTML = ''
     dataMain.forEach(data => {
       const formatClass = data.name.split(' ').join('_')
-      console.log(data)
       const html = `
       <p class="category--index">Category(<span class="category-total"> ${dataMain.length} </span>)</p>
 
         <div class="category-card ${formatClass} call-Tasks caller call-2" style="background-color: ${data.color}">
-          <img src="${data.image}" alt="category_image" class="category__img">
+          <img src="${data.image}" alt="" class="category__img">
           <p class="category__name">${data.name}</p>
           <p class="category__total">${data.tasks.length}</p>
         </div>
@@ -51,7 +50,7 @@ class categoryView extends View {
 
       const html = `
       <p class="page__heading">Category (${this.currentCategory})</p>
-      <p class="page__text">Total Tasks: <span>${this.categoryData.tasks.length}</span></p>
+      <p class="page__text">Total Tasks: <span>${this.categoryData.tasks.length || 0}</span></p>
       `
       this.hidenTitle.innerHTML = '';
       this.hidenTitle.insertAdjacentHTML('afterbegin', html)
@@ -61,7 +60,7 @@ class categoryView extends View {
   renderCategoryData(data) {
     const html = `
           <div class="profile__img-box">
-            <img src="${data.image}" alt="user_image">
+            <img src="${data.image}" alt="">
           </div>
 
           <div class="info">

@@ -45,10 +45,8 @@ function register(data) {
     setTimeout(() => {
       dashboardView.showPage()
       updateRender();
-    }, 1500);
-    setTimeout(() => {
       window.location.reload()
-    }, 2200);
+    }, 1500);
   }
   ///////////////////////////////
 }
@@ -96,11 +94,10 @@ function categoryAdder(data) {
   }, 1000);
 
   //completed form
-  if (msg === 'Register completed') {
+  if (msg === 'Added ✔') {
     module.addCategory(data);
-    updateRender();
-    setTimeout(() => { 
-      window.location.reload()
+    setTimeout(() => {
+      updateRender();
     }, 1500);
   }
 }
@@ -108,9 +105,6 @@ function categoryAdder(data) {
 function taskAdder(data) {
   module.addTask(data);
   updateRender()
-  setTimeout(() => {
-  window.location.reload()
-}, 500);
 }
 
 function categoryData() {
@@ -140,15 +134,12 @@ function deleteCateg(name) {
   updateRender();
   setTimeout(() => {
   window.location.reload()
-  }, 200);
+  }, 0);
 }
 
 function deleteTask(name) {
   module.deleteTask(name)
-  setTimeout(() => {
   updateRender();
-  window.location.reload()
-  }, 600);
 }
 
 function logout() {

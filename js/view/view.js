@@ -2,13 +2,17 @@ export default class View {
   _spinner = document.querySelector('.animation-page')
   _msgBox = document.querySelector('.msg-box-page')
   data;
+  _inp = document.querySelectorAll('.inp')
 
   formSubmit(handler) {
-    this._form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const dataArr = [...new FormData(this)];
-    const data = Object.fromEntries(dataArr);
-    handler(data);
+    this._form.addEventListener('submit',  (e)=> {
+      e.preventDefault();
+      const dataArr = [...new FormData(this._form)];
+      const data = Object.fromEntries(dataArr);
+      handler(data);
+      setTimeout(() => {
+        this._inp.forEach(i => i.value = '')
+      }, 1000);
     })
   }
 
@@ -33,7 +37,7 @@ export default class View {
     if (msg === 'close') {
       this._msgBox.style.display = 'none';
       this._msgBox.innerHTML = '';
-    }  
+    }
   }
 
   
@@ -51,7 +55,7 @@ export default class View {
     tasks.forEach(task => {
       const formatClass = task.name.split(' ').join('_')
 
-        const html = `
+      const html = `
         <div class="item ${formatClass} task-item caller call-2">
           <div class="task-color" style="border: .5rem solid ${task.color};"></div>
           <p class="task-name">${task.name}</p>
@@ -66,7 +70,7 @@ export default class View {
           </div>
         </div>
     `
-      this.parentTask.insertAdjacentHTML('beforeend', html)
+      this.parentTask.insertAdjacentHTML("beforeend", html)
     })
   }
 }

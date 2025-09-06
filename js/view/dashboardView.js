@@ -115,7 +115,7 @@ class dashboardView extends View {
     data.forEach((category) => {
       const html = `
                 <div class="category-card ${category.name}  call-Tasks caller slide-card call-1">
-                  <img class="category__img" src="${category.image}" alt="category-image">
+                  <img class="category__img" src="${category.image}" alt="">
 
                   <div class="category__name">${category.name}</div>
                   <div class="category__total">${category.tasks.length}</div>
@@ -157,43 +157,63 @@ class dashboardView extends View {
   }
 
   renderStatus(status, tasks) {
-    const arr = [
-      status["completed"],
-      status["notStarted"],
-      status["inprocess"],
-    ];
+  const compeletedPer = Math.trunc((status["completed"].length / tasks.length) * 100);
+  const notStartPer = Math.trunc((status["notStarted"].length / tasks.length) * 100);
+  const inproPer = Math.trunc((status["inprocess"].length / tasks.length) * 100);
+    
+  const completed = `
+    <div class="graph">
+      <div class="graph__in-box">
+        <svg><use href="icons.svg#icon-refresh"></use></svg>
+        <p class="graph__num">${status["completed"].length}</p>
+        <div class="track-box">
+          <div class="graph-track">
+            <div class="track" style="width: ${compeletedPer >= 0 ? compeletedPer : 0}%;"></div>
+          </div>
+          <div class="track-num">${compeletedPer >= 0 ? compeletedPer : 0}%</div>
+        </div>
+      </div>
+      <p class="graph__name">Completed</p>
+    </div>
+  `;
+      
+    const notStarted = `
+      <div class="graph">
+        <div class="graph__in-box">
+          <svg><use href="icons.svg#icon-lock"></use></svg>
+          <p class="graph__num">${status["notStarted"].length}</p>
+          <div class="track-box">
+            <div class="graph-track">
+              <div class="track" style="width: ${notStartPer >= 0 ? notStartPer : 0}%;"></div>
+            </div>
+            <div class="track-num">${notStartPer >= 0 ? notStartPer : 0}%</div>
+          </div>
+        </div>
+        <p class="graph__name">Not started</p>
+      </div>
+    `;
 
-    if (arr.length <= 0) return;
+    const Inprocess = `
+      <div class="graph">
+        <div class="graph__in-box">
+          <svg><use href="icons.svg#icon-task"></use></svg>
+          <p class="graph__num">${status["inprocess"].length}</p>
+          <div class="track-box">
+            <div class="graph-track">
+              <div class="track" style="width: ${inproPer >= 0 ? inproPer : 0}%;"></div>
+            </div>
+            <div class="track-num">${inproPer >= 0 ? inproPer : 0}%</div>
+          </div>
+        </div>
+        <p class="graph__name">Inprocess</p>
+      </div>
+    `;
+      
+    const graphs = [completed, notStarted, Inprocess];
     this._graph.innerHTML = '';
-    arr.forEach((data) => {
-      if (data.length <= 0) return;
-
-      const statusName = data[0].status;
-      const percentage = Math.trunc((data.length / tasks.length) * 100);
-      const html = `
-                <div class="graph">
-                  <div class="graph__in-box">
-                    <svg><use href="icons.svg#icon-${
-                      statusName === "completed"
-                        ? "task"
-                        : statusName === "notStarted"
-                        ? "lock"
-                        : "refresh"
-                    }"></use></svg>
-                    <p class="graph__num">${data.length}</p>
-                    <div class="track-box">
-                      <div class="graph-track">
-                        <div class="track" style="width: ${percentage}%;"></div>
-                      </div>
-                      <div class="track-num">${percentage}%</div>
-                    </div>
-                  </div>
-                  <p class="graph__name">${statusName}</p>
-                </div>
-                `;
-
-      this._graph.insertAdjacentHTML("afterbegin", html);
-    });
+    graphs.forEach(graph => {
+      this._graph.insertAdjacentHTML("afterbegin", graph);
+    })
   }
 
   showNotifications(data) {
