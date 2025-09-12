@@ -1402,7 +1402,7 @@ svg {
   background-color: rgba(255, 255, 255, 0.712);
 }
 
-.colorss {
+.colors {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1427,10 +1427,15 @@ svg {
 }
 
 
-.color-box {
+.color .color-box {
   height: 100%;
   width: 100%;
   border-radius: 100%;
   position: absolute;
   top: 0;
+}
+
+.color input:checked + .color-box{
+  border: 2px solid black;
+  scale: 1.1;
 }

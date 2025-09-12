@@ -17,7 +17,7 @@ A **React-powered version (v2)** is coming soon!
 
 ✅ **Dashboard**  
 - Shows **user level**, **total tasks**, **total categories**.  
-- Displays **welcome message**, current **day & time**, and **app logo**.  
+- Displays **welcome message**, current **day & time**, and **app logo**.
 
 ✅ **Category Management**  
 - Create categories with **custom color**, **image**, and **name**.  
