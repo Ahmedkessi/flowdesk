@@ -29,6 +29,7 @@ export let personData = {
     },
     notifications: [],
     categories: [],
+    searchHistory: [],
     Status: {
       inprocess: [],
       notStarted: [],
@@ -230,7 +231,6 @@ function addStatus(task) {
   task.status = statusName;
   const status = personData.data.Status;
   const prevTask = status[statusName].find(el => el.name === task.name);
-  console.log(prevTask)
   if (prevTask) return;
   status[statusName].push(task)
 }
@@ -447,4 +447,17 @@ export function deleteTask(name) {
 
 export function logoutApp() {
   localStorage.removeItem('data')
+}
+
+
+export function searchInTasks(task) {
+  const foundTask =  personData.data.tasks.filter(item => {
+    if (item.name !== task) return;
+    const currTask = item.name;
+    return currTask;
+  })
+
+  if(!foundTask || foundTask.length <= 0) return
+  personData.data.searchHistory.push(foundTask)
+  return foundTask;
 }

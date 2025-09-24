@@ -86,14 +86,19 @@
         <nav class="navigation">
           <div class="logo-box logo-app">
             <img src="images/FlowDesk_Logo.png" alt="logo_image" class="logo_image">
-            <p class="local-date">24-Aug-2025</p>
+            <!-- <p class="local-date">24-Aug-2025</p> -->
           </div>
 
           <div class="middle-nav">
-            <div class="search-box">
+            <form class="search-box search-form">
               <input type="text" class="search-task" placeholder="Search task">
               <svg class="search"><use href="icons.svg#icon-search"></use></svg>
-            </div>
+              <div class="search-list">
+                <p class="history-item">There is no task with this name!</p>
+                <!-- <p class="history-item caller call-1">${el[0].name}</p> -->
+              </div>
+            </form>
+
             <div class="filter-box">
               <svg class="filter"><use href="icons.svg#icon-filter"></use></svg>
               <div class="filter-options">

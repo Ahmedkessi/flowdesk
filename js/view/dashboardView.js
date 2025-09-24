@@ -17,32 +17,17 @@ class dashboardView extends View {
   currentMonth;
   monthData;
   parentMonth = document.querySelector(".transaction__items");
-  logout = document.querySelector('.logout')
+  logout = document.querySelector('.logout');
+  _right = document.querySelector('.right-nav')
+  _logo = document.querySelector('.logo-app')
 
   renderNavigation(data, currentDate) {
-    const html = `
-        <div class="logo-box logo-app">
-          <img src="images/FlowDesk_Logo.png" alt="logo_image" class="logo_image">
+    const currTime = `
           <p class="local-date">${currentDate()}</p>
-        </div>
+    `;
 
-        <div class="middle-nav">
-          <div class="search-box">
-            <input type="text" class="search-task" placeholder="Search task">
-            <svg class="search"><use href="icons.svg#icon-search"></use></svg>
-          </div>
-          <div class="filter-box">
-            <svg class="filter"><use href="icons.svg#icon-filter"></use></svg>
-          <div class="filter-options">
-            <p class="by-date">by date</p>
-            <p class="by-name">by name</p>
-            <p class="by-category">by category</p>
-          </div>
-          </div>
-        </div>
-
-        <div class="right-nav">
-          <div class="msg-box caller call-1">
+    const rightNav = `
+            <div class="msg-box caller call-1">
           <p class="msg-num">${data.data.notifications.length}</p>
           <svg><use href="icons.svg#icon-notification"></use></svg>
         </div>
@@ -53,10 +38,13 @@ class dashboardView extends View {
           <p class="intro__user-name">${data.username}</p>
           <p class="intro__user-about">${data.about}</p>
         </div>
-    </div>
-    `;
-    this._nav.innerHTML = "";
-    this._nav.insertAdjacentHTML("afterbegin", html);
+        `
+    
+      
+    this._logo.insertAdjacentHTML("beforeend", currTime)
+    this._right.innerHTML = "";
+    this._right.insertAdjacentHTML("afterbegin", rightNav);
+
     this.msgIcon = document.querySelector(".msg-box");
   }
 

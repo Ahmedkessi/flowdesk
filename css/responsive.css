@@ -137,6 +137,8 @@
 
   .category-cards {
     grid-template-columns: 1fr 1fr;
+    padding: 2px;
+    gap: 5px;
   }
   
 }

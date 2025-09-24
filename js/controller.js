@@ -1,7 +1,6 @@
 "use strict"
 import { initDesignView } from "./view/designView.js";
 import * as module from '../js/module.js'
-import view from "./view/view.js";
 import registerView from "./view/registerView.js";
 import dashboardView from "./view/dashboardView.js";
 import profileView from "./view/profileView.js";
@@ -10,8 +9,7 @@ import categoryView from "./view/categoryView.js";
 import addTaskView from "./view/addTaskView.js";
 import { currentDate } from "./helper.js";
 import taskView from "./view/taskView.js";
-import showTasks from "./view/showTasks.js";
-
+import SearchTaskView from "./view/SearchTaskView.js";
 
 function initLoadingPage() {
   if (!module.personData.logged) {
@@ -149,6 +147,17 @@ function logout() {
   }, 500);
 }
 
+function searchTask(task) {
+  const data = module.searchInTasks(task);
+  if (!data) return;
+  SearchTaskView.data = data;
+  SearchTaskView.history = module.personData.data.searchHistory;
+}
+
+function clicked() {
+  SearchTaskView.taskData = module.task(SearchTaskView.currentTask);
+}
+
 
 function init() {
   initDesignView();
@@ -160,6 +169,8 @@ function init() {
   addCategoryView.formSubmit(categoryAdder);
   addTaskView.formSubmit(taskAdder)
   dashboardView.logoutApp(logout)
+  SearchTaskView.search(searchTask)
+  SearchTaskView.clickItem(clicked)
 }
 
 
