@@ -49,8 +49,8 @@
       padding: 2rem;
       height: 0px;
       padding-bottom: 25px;
-      box-shadow: 0 0 2px black;
-      background-color: white;
+      box-shadow: 0 0 5px black;
+      background-color: var(--color-primary);
     }
 
     .local-date {
@@ -62,7 +62,7 @@
     }
 
     .search-task {
-      border-radius: 100px;
+      border-radius: 4px;
     }
 
     .navigation {
@@ -78,18 +78,25 @@
     }
 
     .icon {
-      height: 4rem;
-      width: 4rem;
       border-radius: 50%;
+      padding: 2px;
+      transition: all .3s;
+      transform: translateY(-0.5rem);
     }
 
     .icon-svg {
       border-radius: 50%;
       transition: all .3s;
+      width: 100%;
     }
 
-    .icon-svg:hover {
-      background-color: lightgrey;
+    .icon:hover {
+      background-color: var(--color-accent);
+      transform: translateY(-1rem);
+    }
+
+    .icon:hover .icon-svg {
+      fill: white;
     }
 
   .dashboard__main {

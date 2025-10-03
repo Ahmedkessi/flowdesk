@@ -1,6 +1,6 @@
-"use strict"
+"use strict";
 import { initDesignView } from "./view/designView.js";
-import * as module from '../js/module.js'
+import * as module from "../js/module.js";
 import registerView from "./view/registerView.js";
 import dashboardView from "./view/dashboardView.js";
 import profileView from "./view/profileView.js";
@@ -15,35 +15,34 @@ function initLoadingPage() {
   if (!module.personData.logged) {
     setTimeout(() => {
       registerView.showPage();
-    },3000)
-  }
-  else {
+    }, 3000);
+  } else {
     dashboardView.Spinner();
     setTimeout(() => {
       dashboardView.showPage();
-    },2000)
+    }, 2000);
   }
 }
 
 // The timers waiting the input file image while reading and  loading image;
 function register(data) {
   //Check form
-  const msg = module.checkRegistForm(data, 'data')
-  registerView.msgBox(msg);  
+  const msg = module.checkRegistForm(data, "data");
+  registerView.msgBox(msg);
   //message box hide
   setTimeout(() => {
-    registerView.msgBox('close')
+    registerView.msgBox("close");
   }, 1000);
 
   //completed form
-  if (msg === 'Register completed') {
-    module.registData(data)
+  if (msg === "Register completed") {
+    module.registData(data);
     registerView.Spinner();
-  
+
     setTimeout(() => {
-      dashboardView.showPage()
+      dashboardView.showPage();
       updateRender();
-      window.location.reload()
+      window.location.reload();
     }, 1500);
   }
   ///////////////////////////////
@@ -51,18 +50,21 @@ function register(data) {
 
 function loaded() {
   const files = registerView.imgFiles || addCategoryView.imgFiles;
-  const img = registerView.imgFiles ? registerView.userImg : addCategoryView.userImg;
-  module.readInput(files, img)
+  const img = registerView.imgFiles
+    ? registerView.userImg
+    : addCategoryView.userImg;
+  module.readInput(files, img);
 }
 
-
 function updateRender() {
-  profileView.render(module.personData)
+  profileView.render(module.personData);
   categoryView.render(module.personData.data.categories);
-  const name = module.personData.data.categories.map(category => category.name);
-  taskView.render(name)
-  taskView.renderTasks(module.personData.data.tasks)
-  currentDate()
+  const name = module.personData.data.categories.map(
+    (category) => category.name
+  );
+  taskView.render(name);
+  taskView.renderTasks(module.personData.data.tasks);
+  currentDate();
   module.statusLoad();
   dashboardRender(module.personData);
   dashboardView.showNotifications(module.personData.data.notifications);
@@ -70,29 +72,32 @@ function updateRender() {
 }
 
 function dashboardRender(data) {
-  dashboardView.renderNavigation(data, currentDate)
-  dashboardView.renderHeader(data, module.shortDate())
-  dashboardView.renderReport(data)
-  dashboardView.renderTopCategories(module.sortCategory())
+  dashboardView.renderNavigation(data, currentDate);
+  dashboardView.renderHeader(data, module.shortDate());
+  dashboardView.renderReport(data);
+  dashboardView.renderTopCategories(module.sortCategory());
   dashboardView.renderNewestTasks(module.newestTasks());
-  dashboardView.renderStatus(module.personData.data.Status, module.personData.data.tasks)
-  dashboardView.showCategoryTasks(categoryData)
-  dashboardView.showMonthTasks(monthData)
+  dashboardView.renderStatus(
+    module.personData.data.Status,
+    module.personData.data.tasks
+  );
+  dashboardView.showCategoryTasks(categoryData);
+  dashboardView.showMonthTasks(monthData);
   taskView.showTaskData(taskData, deleteTask);
-  categoryView.showCategoryData(categoryInfo)
+  categoryView.showCategoryData(categoryInfo);
 }
 
 function categoryAdder(data) {
-    //Check form
-  const msg = module.checkRegistForm(data, 'category')
+  //Check form
+  const msg = module.checkRegistForm(data, "category");
   addCategoryView.msgBox(msg);
   //message box hide
   setTimeout(() => {
-    addCategoryView.msgBox('close')
+    addCategoryView.msgBox("close");
   }, 1000);
 
   //completed form
-  if (msg === 'Added ✔') {
+  if (msg === "Added ✔") {
     module.addCategory(data);
     setTimeout(() => {
       updateRender();
@@ -102,12 +107,12 @@ function categoryAdder(data) {
 
 function taskAdder(data) {
   module.addTask(data);
-  updateRender()
+  updateRender();
 }
 
 function categoryData() {
-  module.categTasks(dashboardView.categ)
-  dashboardView.catTasks = module.categTasks(dashboardView.categ)
+  module.categTasks(dashboardView.categ);
+  dashboardView.catTasks = module.categTasks(dashboardView.categ);
 }
 
 function monthData() {
@@ -115,49 +120,73 @@ function monthData() {
 }
 
 function taskData() {
-  const className = taskView.currentTask.split('_').join(' ')
+  const className = taskView.currentTask.split("_").join(" ");
   taskView.currentTask = className;
   taskView.taskData = module.task(className);
 }
 
 function categoryInfo() {
-  const className = categoryView.currentCategory.split('_').join(' ')
+  const className = categoryView.currentCategory.split("_").join(" ");
   categoryView.currentCategory = className;
   categoryView.categoryData = module.category(className);
-  categoryView.deleteCategory(deleteCateg)
+  categoryView.deleteCategory(deleteCateg);
 }
 
 function deleteCateg(name) {
   module.deleteCategory(name);
   updateRender();
   setTimeout(() => {
-  window.location.reload()
+    window.location.reload();
   }, 0);
 }
 
 function deleteTask(name) {
-  module.deleteTask(name)
+  module.deleteTask(name);
   updateRender();
 }
 
 function logout() {
   setTimeout(() => {
-    module.logoutApp()
-    window.location.reload();
+    const lst = document.querySelector(".logout-msg");
+    lst.style.opacity = 1;
+    lst.style.visibility = "visible";
+    document.querySelector(".no").addEventListener("click", () => {
+      lst.style.opacity = 0;
+      lst.style.visibility = "hidden";
+    });
+
+    document.querySelector(".yes").addEventListener("click", () => {
+      module.logoutApp();
+      window.location.reload();
+    });
   }, 500);
 }
 
 function searchTask(task) {
   const data = module.searchInTasks(task);
-  if (!data) return;
   SearchTaskView.data = data;
+
+  if (!data) {
+    registerView.msgBox("This task is not available!");
+    setTimeout(() => {
+      registerView.msgBox("close");
+    }, 1500);
+  }
   SearchTaskView.history = module.personData.data.searchHistory;
 }
+SearchTaskView.history = module.personData.data.searchHistory;
 
-function clicked() {
-  SearchTaskView.taskData = module.task(SearchTaskView.currentTask);
+function clicked(task) {
+  const data = module.searchInTasks(task);
+  SearchTaskView.data = data;
+
+  if (!data) {
+    registerView.msgBox("This task is not available!");
+    setTimeout(() => {
+      registerView.msgBox("close");
+    }, 1500);
+  }
 }
-
 
 function init() {
   initDesignView();
@@ -167,11 +196,10 @@ function init() {
   registerView.imgUpload(loaded);
   addCategoryView.imgUpload(loaded);
   addCategoryView.formSubmit(categoryAdder);
-  addTaskView.formSubmit(taskAdder)
-  dashboardView.logoutApp(logout)
-  SearchTaskView.search(searchTask)
-  SearchTaskView.clickItem(clicked)
+  addTaskView.formSubmit(taskAdder);
+  dashboardView.logoutApp(logout);
+  SearchTaskView.search(searchTask);
+  SearchTaskView.clickItem(clicked);
 }
 
-
-init()
+init();

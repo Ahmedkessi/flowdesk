@@ -1,24 +1,22 @@
-import View from './view.js';
+import View from "./view.js";
 
 class categoryView extends View {
-  parentEl = document.querySelector('.category-cards');
-  parentCard = document.querySelector('.category-cards')
+  parentEl = document.querySelector(".category-cards");
+  parentCard = document.querySelector(".category-cards");
   hidenTitle = document.querySelector(".page-title-2");
-  mainPage = document.querySelector('.main-page-2')
+  mainPage = document.querySelector(".main-page-2");
   currentCategory;
   categoryData;
   parentTask;
   deleteBtn;
   editBtn;
 
-
-  
   render(dataMain) {
     if (dataMain.length <= 0) return;
 
-    this.parentEl.innerHTML = ''
-    dataMain.forEach(data => {
-      const formatClass = data.name.split(' ').join('_')
+    this.parentEl.innerHTML = "";
+    dataMain.forEach((data) => {
+      const formatClass = data.name.split(" ").join("_");
       const html = `
       <p class="category--index">Category(<span class="category-total"> ${dataMain.length} </span>)</p>
 
@@ -28,32 +26,31 @@ class categoryView extends View {
           <p class="category__total">${data.tasks.length}</p>
         </div>
         
-        `
-    this.parentEl.insertAdjacentHTML('beforeend', html)
+        `;
+      this.parentEl.insertAdjacentHTML("beforeend", html);
     });
   }
 
-
-    showCategoryData(handler) {
+  showCategoryData(handler) {
     this.parentCard.addEventListener("click", (e) => {
       this.hidenTitle.innerHTML = "";
-      const currCategory = e.target.closest('.category-card').classList[1];
+      const currCategory = e.target.closest(".category-card").classList[1];
       if (!currCategory) return;
       this.currentCategory = currCategory;
-      handler()
-  
-      if (this.categoryData) {
-        this.renderCategoryData(this.categoryData)
-      }
+      handler();
 
-      
+      if (this.categoryData) {
+        this.renderCategoryData(this.categoryData);
+      }
 
       const html = `
       <p class="page__heading">Category (${this.currentCategory})</p>
-      <p class="page__text">Total Tasks: <span>${this.categoryData.tasks.length || 0}</span></p>
-      `
-      this.hidenTitle.innerHTML = '';
-      this.hidenTitle.insertAdjacentHTML('afterbegin', html)
+      <p class="page__text">Total Tasks: <span>${
+        this.categoryData.tasks.length || 0
+      }</span></p>
+      `;
+      this.hidenTitle.innerHTML = "";
+      this.hidenTitle.insertAdjacentHTML("afterbegin", html);
     });
   }
 
@@ -87,25 +84,22 @@ class categoryView extends View {
 
             </div>
 
-    `
+    `;
 
-    this.mainPage.innerHTML = '';
-    this.mainPage.insertAdjacentHTML('beforeend', html);
-    this.parentTask = document.querySelector('.main-page-3');
-    this.renderTasks(data.tasks)
-    this.deleteBtn = document.querySelector('.delete')
+    this.mainPage.innerHTML = "";
+    this.mainPage.insertAdjacentHTML("beforeend", html);
+    this.parentTask = document.querySelector(".main-page-3");
+    this.renderTasks(data.tasks);
+    this.deleteBtn = document.querySelector(".delete");
   }
 
-  deleteCategory(handler){
+  deleteCategory(handler) {
     setTimeout(() => {
-    this.deleteBtn.addEventListener('click', () => {
-      handler(this.categoryData.name);
-    })
+      this.deleteBtn.addEventListener("click", () => {
+        handler(this.categoryData.name);
+      });
     }, 1000);
   }
-  
-
 }
-
 
 export default new categoryView();
