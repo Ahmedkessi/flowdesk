@@ -230,6 +230,7 @@ function status(task) {
 }
 
 function addStatus(task) {
+  if (!task.Status) return;
   const arr = Object.entries(task.Status);
   const name = arr.flatMap((el) => {
     return el;

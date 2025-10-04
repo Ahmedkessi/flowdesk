@@ -188,8 +188,8 @@ body {
 .img-box {
   background: linear-gradient(
     to right bottom,
-    lime,
-    rgb(44, 202, 255)
+    rgb(18, 209, 235),
+    rgb(2, 127, 168)
   ) !important;
   height: 8rem;
   width: 8rem;
@@ -201,12 +201,13 @@ body {
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
+  border: 4px solid rgba(0, 237, 245, 0.411);
 }
 
 .img-box svg {
   width: 35px;
   height: 35px;
-  fill: rgb(0, 0, 0);
+  fill: rgb(255, 255, 255);
   z-index: 999;
 }
 
@@ -234,7 +235,7 @@ body {
 .username-input {
   padding: 1.4rem 1.6rem;
   border-radius: 0.3rem;
-  border: 0.1rem solid black;
+  border: 0.3rem solid rgb(0, 132, 255);
   border-radius: 8rem;
 }
 
@@ -252,7 +253,7 @@ textarea:focus {
 .radio {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .radio__box {
@@ -261,20 +262,43 @@ textarea:focus {
 }
 
 .box-rad {
-  height: 230px;
-  width: 203px;
-  background-color: red;
-  scale: 2;
+  height: 20px;
+  width: 20px;
+  border: 4px solid rgb(0, 118, 214);
+  display: inline-block;
+  border-radius: 100%;
+  padding: 0.5rem;
+  position: relative;
 }
 
-input[type="radio"],
+.radio__box input[type="radio"]:checked ~ label .box-rad::after {
+  content: "";
+  height: 90%;
+  width: 90%;
+  background-color: rgb(165, 165, 165);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
 .radio label {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 1.6rem;
+}
+
+.radio__box input[type="radio"] {
+  display: none;
 }
 
 .birthdate-box {
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .birthdate {
@@ -282,14 +306,17 @@ input[type="radio"],
   width: 20px;
   cursor: pointer;
   margin: 0 auto;
+  display: inline-block;
+  scale: 1.5;
+  margin-top: 8px;
 }
 
 .about-user {
   height: 13rem;
   padding: 1.2rem 1rem;
   border-radius: 1.4rem;
-  border: 0.1rem solid black;
-  font-size: 1.4rem;
+  border: 0.3rem solid rgb(0, 132, 255);
+  font-size: 1.8rem;
   font-family: sans-serif;
 }
 
@@ -298,11 +325,12 @@ input[type="radio"],
 .btn:visited {
   padding: 1.2rem 1.6rem;
   border-radius: 0.8rem;
-  border: 0.1rem solid black;
+  border: none;
   background-color: var(--color-primary);
   color: var(--color-neutral-light);
   cursor: pointer;
   transition: 0.2s;
+  box-shadow: 0 2px 4px black;
 }
 
 .btn:hover {
@@ -355,7 +383,9 @@ svg {
   top: 0;
   left: 0;
   right: 0;
-  background-color: var(--color-grey);
+  /* background-color: var(--color-grey);
+  background-color: rgb(226, 221, 221); */
+  background-color: rgb(203, 203, 207);
   z-index: 99;
 }
 
@@ -440,9 +470,10 @@ svg {
 .search-task {
   width: 100%;
   padding: 0.6rem 1.6rem;
-  border-radius: 0.6rem;
-  border: 1px solid var(--color-medium-gray);
   padding-right: 10px;
+  border-radius: 50px;
+  border: none;
+  transition: all 0.2s;
 }
 
 .search-task:focus ~ .search-list {
@@ -451,15 +482,16 @@ svg {
 }
 
 .search-task:focus {
-  box-shadow: 0 2px 2px var(--color-neutral-dark);
+  box-shadow: 0 0px 5px lightgrey;
+  border: 4px solid rgba(148, 132, 255, 0.733);
 }
 
 .search-box svg {
-  background-color: var(--color-neutral-light);
   height: 25px;
   width: 25px;
   position: absolute;
-  right: 2px;
+  right: 3px;
+  border-radius: 50px;
 }
 
 .filter-box {
@@ -471,7 +503,6 @@ svg {
 }
 
 .filter-options {
-  height: 100px;
   width: 120px;
   border-radius: 1.2rem;
   background-color: white;
@@ -479,13 +510,14 @@ svg {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 0.5rem;
+  padding: 1rem 0.5rem;
   position: absolute;
   bottom: -100px;
   left: -50px;
   box-shadow: 0 2px 5px var(--color-neutral-dark);
   display: none;
   transition: all 0.3s;
+  z-index: 999;
 }
 
 .filter-options p {
@@ -518,7 +550,7 @@ svg {
 
 .msg-box:hover .msg-num {
   bottom: 25px;
-  padding: 0.4rem;
+  padding: 0.4rem 0.8rem;
 }
 
 .msg-num {
@@ -559,8 +591,8 @@ svg {
 
 .intro__user-about {
   position: absolute;
-  bottom: -40px;
-  left: -5px;
+  bottom: -45px;
+  right: 0px;
   background-color: var(--color-grey);
   padding: 0.5rem 1rem;
   opacity: 0;
@@ -592,7 +624,8 @@ svg {
 
 .icons-side {
   width: 5rem;
-  background-color: rgba(88, 88, 226, 0.842);
+  /* background-color: rgba(88, 88, 226, 0.842); */
+  background-color: rgba(158, 158, 163, 0.842);
   height: 100%;
   border-radius: 0.6rem;
 }
@@ -610,7 +643,8 @@ svg {
 }
 
 .icon svg {
-  fill: rgba(88, 88, 226, 0.842);
+  /* fill: rgba(88, 88, 226, 0.842); */
+  fill: rgba(61, 59, 59, 0.842);
   width: 80%;
 }
 
@@ -661,7 +695,8 @@ svg {
   width: 95%;
   margin-top: 10px;
   font-size: 1.5rem;
-  background-color: rgba(88, 88, 226, 0.842);
+  /* background-color: rgba(88, 88, 226, 0.842); */
+  background-color: rgba(158, 158, 163, 0.842);
   color: var(--color-neutral-light);
   padding: 0 2rem;
   display: flex;
@@ -675,7 +710,7 @@ svg {
 }
 
 .links-side p.active-link {
-  background-color: var(--color-medium-gray);
+  background-color: rgba(61, 59, 59, 0.842);
 }
 
 .links-side.openSide {
@@ -729,11 +764,17 @@ svg {
   cursor: pointer;
 }
 
+.profile-title {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.8rem;
+}
+
 .profile-info {
-  margin-top: 40px;
+  margin-top: 25px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
   justify-content: center;
   align-items: center;
 }
@@ -744,11 +785,11 @@ svg {
     lime,
     rgb(44, 202, 255)
   ) !important;
-  width: 7rem;
-  height: 7rem;
+  width: 8.5rem;
+  height: 8.5rem;
   border-radius: 10rem;
   overflow: hidden;
-  border: 1px solid var(--color-accent);
+  border: 3px solid rgb(0, 225, 255);
 }
 
 .profile__img-box img {
@@ -778,6 +819,7 @@ svg {
   font-size: 1.5rem;
   height: 55vh;
   overflow: scroll;
+  padding-bottom: 6rem;
 }
 
 .info {
@@ -787,8 +829,11 @@ svg {
   align-items: center;
   margin-top: 1.5rem;
   width: 30rem;
+  border-radius: 6px;
   height: 4rem;
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0.048);
+  padding: 2.5rem 2rem;
+  border: 1px solid rgb(0, 172, 172);
 }
 
 .info svg {
@@ -798,7 +843,7 @@ svg {
 .info__text {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .info--title {
@@ -814,7 +859,7 @@ svg {
   font-family: "roboto", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
 }
 
 .user-summary {
@@ -826,6 +871,8 @@ svg {
   max-width: 300px;
   text-align: start;
   padding: 2rem;
+  box-shadow: 0 0 5px black;
+  border-radius: 8px;
 }
 
 .user-summary span {
@@ -865,30 +912,44 @@ svg {
 }
 
 .report {
+  width: 100%;
+  padding: 2.5rem 2rem;
+  background-color: white;
+  box-shadow: 0 0 4px rgba(126, 124, 124, 0.493);
+  border-radius: 0.6rem;
+  margin-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.report h2 {
+  border-bottom: 2px solid rgb(0, 158, 158);
+  display: inline;
+  width: 40px;
+}
+
+.report .rep {
   display: flex;
   justify-content: space-between;
   align-items: start;
-  width: 100%;
-  padding: 2.5rem 2rem;
-  gap: 1rem;
-  background-color: white;
-  box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.329);
-  border-radius: 0.6rem;
-  margin-bottom: 5rem;
+  padding: 2rem 1rem 0 1rem;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.445);
+  border-radius: 8px;
 }
 
-.report > div {
+.report .rep > div {
   background-color: var(--color-neutral-light);
   border-radius: 10rem;
-  height: 8rem;
-  width: 8rem;
+  height: 10rem;
+  width: 10rem;
   display: flex;
-  outline: 1px solid var(--color-secondary);
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   position: relative;
+  border: 2px solid var(--color-secondary);
 }
 
 .report .in-box {
@@ -928,7 +989,7 @@ svg {
   margin-bottom: 5rem;
   position: relative;
   background-color: rgb(255, 255, 255);
-  box-shadow: 0px 0px 0.2rem rgba(0, 0, 0, 0.329);
+  box-shadow: 0 0 4px rgba(153, 152, 152, 0.438);
 }
 
 .top-categories {
@@ -984,6 +1045,14 @@ svg {
 .right-category {
   right: 10px;
 }
+
+.emty-card {
+  height: 100px;
+  width: 100px;
+  background-color: grey;
+  border-radius: 8px;
+}
+
 /***************/
 
 .newest-tasks {
@@ -1060,14 +1129,17 @@ svg {
   border-radius: 0.6rem;
   cursor: pointer;
   transition: 0.2s;
+  border: 1px solid rgb(0, 172, 172);
 }
 
 .tr__date:hover {
   background-color: var(--color-medium-gray);
+  color: white;
 }
 /******************/
 
 .status {
+  padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -1407,6 +1479,7 @@ svg {
   left: 0;
   right: 0;
   display: none;
+  padding-bottom: 15rem;
 }
 
 .call {
@@ -1482,7 +1555,7 @@ svg {
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
   position: relative;
-  height: 90vh;
+  height: 100%;
   font-size: 1.5rem;
   overflow: scroll;
 }
@@ -1490,7 +1563,6 @@ svg {
 .main-page-2 {
   margin: 0 auto;
   font-size: 2rem;
-  padding-bottom: 3.5rem;
 }
 
 .main-page-2 .info {
@@ -1503,11 +1575,26 @@ svg {
   flex-direction: column;
   max-width: 800px;
   justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  gap: 1.5rem;
+  align-items: start;
+  gap: 2rem;
   border-radius: 1rem;
   padding: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 80%;
+}
+
+.category-img p,
+.category-color p {
+  border-bottom: 2px solid rgb(1, 153, 153);
+  margin-bottom: 10px;
+  width: 50%;
 }
 
 .category-profile {
@@ -1591,17 +1678,17 @@ svg {
 
 .colors {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   gap: 4px;
 }
 
 .color {
   position: relative;
-  background-color: red;
   height: 16px;
   width: 16px;
   border-radius: 100%;
+  cursor: pointer;
 }
 
 .color input {
@@ -1610,6 +1697,7 @@ svg {
   height: 100%;
   width: 100%;
   z-index: 2;
+  cursor: pointer;
   opacity: 0;
 }
 
@@ -1618,6 +1706,7 @@ svg {
   width: 100%;
   border-radius: 100%;
   position: absolute;
+  cursor: pointer;
   top: 0;
 }
 

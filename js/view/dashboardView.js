@@ -62,7 +62,9 @@ class dashboardView extends View {
 
   renderReport(data) {
     const html = `
-              <div class="report__level">
+              <h2>Report</h2>
+              <div class='rep'>
+                <div class="report__level">
                 <div class="in-box">
                   <svg><use href="icons.svg#icon-star"></use></svg>
                   <p class="level-total">${data.level}</p>
@@ -91,6 +93,7 @@ class dashboardView extends View {
                   <div class="track"></div>
                 </div>
               </div>
+            </div>
 
             </div>
     `;
@@ -99,6 +102,9 @@ class dashboardView extends View {
   }
 
   renderTopCategories(data) {
+
+    if (data.length < 1) return;
+    
     this._topCategory.innerHTML = "";
     data.forEach((category) => {
       const html = `
@@ -117,9 +123,11 @@ class dashboardView extends View {
   renderNewestTasks(tasks) {
     const header = document.querySelector(".tasks-header");
     const taskMain = document.querySelector(".tasks-main");
+    
+    if (tasks.length < 1) return;
     header.innerHTML = "";
     taskMain.innerHTML = "";
-
+    
     tasks.forEach((task) => {
       const htmlhead = `
               <p class="category--header category--name">${task.category}</p>
