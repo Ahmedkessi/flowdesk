@@ -182,10 +182,7 @@ export function addTask(data) {
     category.tasks.push(task);
     task.color = category.color;
     task.createdDate = currentDate();
-<<<<<<< HEAD
     task.createdTime = new Date();
-=======
->>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
     task.category = category.name;
     personData.data.tasks.push(task);
   }
@@ -309,20 +306,11 @@ function levelUp(categories) {
 
 export function shortDate() {
   return new Intl.DateTimeFormat("en-US", {
-<<<<<<< HEAD
     weekday: "long",
   }).format();
 }
 
 
-=======
-    hour: "2-digit",
-    minute: "2-digit",
-    weekday: "short",
-  }).format();
-}
-
->>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
 export function sortCategory() {
   const categories = personData.data.categories;
 
@@ -343,13 +331,10 @@ export function newestTasks() {
   return personData.data.tasks.slice(-5);
 }
 
-<<<<<<< HEAD
 export function todayTasks() {
   return personData.data.tasks.filter(task=> Math.round(Math.abs(new Date() - +new Date(task.createdTime)) / (1000 * 60 * 60 * 24)) === 0 );
 }
 
-=======
->>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
 export function categTasks(name) {
   return personData.data.categories.find((category) => category.name === name)
     .tasks;
