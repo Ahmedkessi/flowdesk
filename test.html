@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SearchQuery</title>
+</head>
+<style>
+    .container {
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px;
+    }
+    input {
+        width: 300px;
+        padding: 10px 20px;
+        border-radius: 100px;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    li{
+        display: flex;
+        justify-content: space-between;
+        width: 70%;
+        margin: 0 auto;
+        background-color: lightgrey;
+        padding: 8px 10px;
+        border-radius: 8px;
+        margin-bottom: 4px;
+    }
+
+    button {
+        cursor: pointer;
+    }
+</style>
+<body>
+    <div class="container">
+    <input type="text" name="" id="input">
+    <ul class="box">
+    </ul>
+    <div class="time">
+
+    </div>
+    </div>
+
+    <script>
+        const searchData = [`Ahmed`, `Ayuub`, `Ayuub ciise`, `Awaab`, `Ckariin`, `Marwaan`, 
+            `Muuse`, `Ali ibraahim`, `Ali isaq`, `Yacquub`, `player`, `coder`, `developer`]
+
+
+            const input = document.querySelector(`#input`);
+            const box = document.querySelector(`.box`)
+
+            input.addEventListener(`keydown`, (e)=> {
+                box.innerHTML = ``;
+                const data = searchData.map(arr => arr[0].toLowerCase() + arr.slice(1)).filter(data => data.includes(e.target.value.toLowerCase()));
+                if(data.length < 1 || input.length < 1) return box.innerHTML = `Nothing found!`;;
+
+                
+                data.forEach((data, i)=> {
+                    const html = `
+                        <li>${data}
+                            <button class="btn">X</button>
+                        </li>
+                    `;
+    
+                    box.insertAdjacentHTML(`beforeend`, html)
+                   const del = document.querySelector(`.btn`);
+                   del.addEventListener(`click`, ()=> handlerDel(i))
+                })
+
+                function handlerDel(i){
+                    return data.splice(i + 1);
+                }
+
+            })
+
+
+            const timeBox = document.querySelector(`.time`);
+            const date = new Date();
+            let hour = date.getHours();
+            let min = date.getMinutes();
+            let sec = date.getSeconds();
+
+
+            setInterval(() => {
+                 sec += 1;
+                 if(sec > 60) sec = 0;
+            }, 1000);
+
+            setInterval(() => {
+                if(min > 60) min = 0
+                if(sec === 0) min +=1;
+            }, 1000);
+
+            setInterval(() => {
+                if(hour > 24) hour = 0
+                if(min === 0) hour +=1;
+            }, 1000);
+
+            
+            setInterval(()=> {
+                timeBox.innerHTML = `${hour < 10 ? `0${hour}` : hour}:${min < 10 ? `0${min}` : min}: ${sec < 10 ? `0${sec}` : sec}`;
+            }, 1000)
+
+
+            
+        
+
+
+
+
+
+            let ty =0;
+            setInterval(() => {
+                ty += 1;
+                
+            }, 1000);
+
+            const p = `<p>${date}
+                    <span>${hour}</span>
+                    <span>${ty}</span>
+                        </p>`;
+
+                timeBox.insertAdjacentHTML("afterbegin", p)
+    </script>
+    
+</body>
+</html>
