@@ -74,11 +74,17 @@ function updateRender() {
 function dashboardRender(data) {
   dashboardView.renderNavigation(data, currentDate);
   dashboardView.renderHeader(data, module.shortDate());
+<<<<<<< HEAD
 
   dashboardView.renderReport(data);
   dashboardView.renderTopCategories(module.sortCategory());
   dashboardView.renderNewestTasks(module.newestTasks());
   dashboardView.renderTodayTasks(module.todayTasks());
+=======
+  dashboardView.renderReport(data);
+  dashboardView.renderTopCategories(module.sortCategory());
+  dashboardView.renderNewestTasks(module.newestTasks());
+>>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
   dashboardView.renderStatus(
     module.personData.data.Status,
     module.personData.data.tasks

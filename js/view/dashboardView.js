@@ -1,5 +1,6 @@
 import View from "./view.js";
 
+<<<<<<< HEAD
     const date = new Date();
     let hour = date.getHours();
     let min = date.getMinutes();
@@ -35,6 +36,8 @@ import View from "./view.js";
 
     
 
+=======
+>>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
 class dashboardView extends View {
   parentEl = document.querySelector(".application");
   _dashboard = document.querySelector(".dashboard-page ");
@@ -84,8 +87,20 @@ class dashboardView extends View {
   }
 
   renderHeader(data, time) {
+<<<<<<< HEAD
     guestName.innerHTML = data.username+`!`;
     dayWel.innerHTML = time;
+=======
+    const html = `
+          <h1 class="welcome">Welcome, <span class="guest">${data.username}!</span></h1>
+
+          <h2 class="welcome_date">
+          <span class="welcome--day">${time}</span>
+          </h2>
+    `;
+    this._dashboardHead.innerHTML = "";
+    this._dashboardHead.insertAdjacentHTML("afterbegin", html);
+>>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
   }
 
   renderReport(data) {
@@ -136,7 +151,11 @@ class dashboardView extends View {
     this._topCategory.innerHTML = "";
     data.forEach((category) => {
       const html = `
+<<<<<<< HEAD
                 <div class="category-card ${category.name} emty-card call-Tasks caller slide-card call-1">
+=======
+                <div class="category-card ${category.name}  call-Tasks caller slide-card call-1">
+>>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
                   <img class="category__img" src="${category.image}" alt="">
 
                   <div class="category__name">${category.name}</div>
@@ -180,6 +199,7 @@ class dashboardView extends View {
     });
   }
 
+<<<<<<< HEAD
   renderTodayTasks(tasks){
     const header = document.querySelector(".today-header");
     const taskMain = document.querySelector(".today-main");
@@ -212,6 +232,8 @@ class dashboardView extends View {
     });
   }
 
+=======
+>>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
   renderStatus(status, tasks) {
   const compeletedPer = Math.trunc((status["completed"].length / tasks.length) * 100);
   const notStartPer = Math.trunc((status["notStarted"].length / tasks.length) * 100);
@@ -220,7 +242,11 @@ class dashboardView extends View {
   const completed = `
     <div class="graph">
       <div class="graph__in-box">
+<<<<<<< HEAD
         <svg><use href="icons.svg#icon-task"></use></svg>
+=======
+        <svg><use href="icons.svg#icon-refresh"></use></svg>
+>>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
         <p class="graph__num">${status["completed"].length}</p>
         <div class="track-box">
           <div class="graph-track">
@@ -252,7 +278,11 @@ class dashboardView extends View {
     const Inprocess = `
       <div class="graph">
         <div class="graph__in-box">
+<<<<<<< HEAD
           <svg><use href="icons.svg#icon-refresh"></use></svg>
+=======
+          <svg><use href="icons.svg#icon-task"></use></svg>
+>>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
           <p class="graph__num">${status["inprocess"].length}</p>
           <div class="track-box">
             <div class="graph-track">

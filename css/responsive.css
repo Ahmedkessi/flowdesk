@@ -11,6 +11,7 @@
 
   .category-cards {
     grid-template-columns: 1fr 1fr 1fr;
+<<<<<<< HEAD
     gap: 4px;
   }
 
@@ -76,6 +77,8 @@
 @media screen and (max-height: 470px) {
   .tasks-list{
     height: 68vh;
+=======
+>>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
   }
 }
 
@@ -90,10 +93,13 @@
     padding: 1.5rem 0px !important;
   }
 
+<<<<<<< HEAD
   .tasks-list{
     height: 70vh;
   }
 
+=======
+>>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
   .side-bar {
     top: auto;
     left: 0;
@@ -201,6 +207,7 @@
     display: none;
   }
 
+<<<<<<< HEAD
 
 }
 
@@ -220,6 +227,10 @@
 }
 
 
+=======
+}
+
+>>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
 @media screen and (max-width: 500px) {
   .logo-app img{
     width: 13.5rem;
@@ -229,7 +240,10 @@
     gap: 0px;
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
   .category-cards {
     grid-template-columns: 1fr 1fr;
     padding: 2px;
@@ -250,7 +264,10 @@
   .list-icon{
     display: none;
   }
+<<<<<<< HEAD
   
+=======
+>>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
 
   body {
     padding-left: .5rem;

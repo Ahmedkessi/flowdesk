@@ -10,6 +10,11 @@ export function currentDate() {
   return `${day}-${month}-${year}`
 }
 
+<<<<<<< HEAD
 export function formatDate(date){
     return date.split('-').reverse().join(',');
+=======
+export function formatDate(data){
+    return data.split('-').reverse().join(',');
+>>>>>>> 144ca4d08e73240328207d27e485f59cdfea5b65
   }  
