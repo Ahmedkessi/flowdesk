@@ -55,11 +55,41 @@ class SearchTaskView extends View {
   constructor() {
     super();
     setTimeout(() => {
+      const historyNames = [...this.history.map(el=> el.name)];
       this._historyList.innerHTML = "";
-      this.history.forEach((el) => {
-        const html = `<p class="history-item">${el.name}</p>`;
+      
+      historyNames.forEach((name) => {
+        const html = `<p class="history-item"><span>${name}</span> <span class="times ${name}">&times;</span> </p>`;
         this._historyList.insertAdjacentHTML("beforeend", html);
       });
+      const del = document.querySelectorAll(`.times`);
+console.log(this._historyList)
+
+
+      del.forEach(btn => {
+      btn.addEventListener("click", (e)=> { 
+
+        console.log(e.target.classList[1])
+        console.log(e.target.className.split(` `).at(1))
+  
+        if(1 === 1){
+
+          const name = e.target.className.split(` `).at(1)
+          const i = historyNames.findIndex(nam => nam === name);
+          historyNames.splice(i, 1)
+          
+          this._historyList.innerHTML = "";
+
+          historyNames.forEach((name) => {
+          const html = `<p class="history-item"><span>${name}</span> <span class="times ${name}">&times;</span> </p>`;
+          this._historyList.insertAdjacentHTML("beforeend", html);
+        });
+  
+      };
+      })
+        
+      })
+      
     }, 1000);
   }
 
@@ -70,24 +100,13 @@ class SearchTaskView extends View {
       this.currentTask = data;
       handler(data);
 
-      // const key = e.key.toLowerCase()
-      // const smallLetter = this._acceptedKeys.map(word => word.toLowerCase())
-      // const availableKey = smallLetter.filter(text => text === key)
-      // if (availableKey.length === 0) return;
-
-      // this._key.push(key);
-      // const smallKey = this._key;
-      // const sentece = smallKey.join("")
-      // console.log(this._input)
-      // console.log(sentece)
-      // handler(sentece);
 
       if (!this.data) return;
       if (!this.history) return;
 
       this._historyList.innerHTML = "";
       this.history.forEach((el) => {
-        const html = `<p class="history-item">${el.name}</p>`;
+        const html = `<p class="history-item"><span>${el.name}</span> <span class="times ${el.name}">&times;</span> </p>`;
         this._historyList.insertAdjacentHTML("beforeend", html);
       });
       this._input.value = "";
@@ -97,13 +116,41 @@ class SearchTaskView extends View {
 
   clickItem(handler) {
     this._historyList.addEventListener("click", (e) => {
-      this.hidenTitle.innerHTML = "";
+      if(e.target.classList[0] === `time`) {
+        const historyNames = [...this.history.map(el=> el.name)];
 
-      const currTask = e.target.closest(".history-item");
-      this.currentTask = currTask.innerHTML.toLowerCase();
-      handler(this.currentTask);
-      this.showTaskData();
+          const name = e.target.classList[1]
+          const i = historyNames.findIndex(nam => nam === name);
+          historyNames.splice(i, 1)
+          console.log(historyNames)
+          this._historyList.innerHTML = "";
+
+          historyNames.forEach((name) => {
+          const html = `<p class="history-item"><span>${name}</span> <span class="times ${name}">&times;</span> </p>`;
+          this._historyList.insertAdjacentHTML("beforeend", html);
+        });
+      }
+
+      console.log(e)
+      if(e.target.className === "history-item"){
+        this.clickElement(e, handler)
+      }
+        
     });
+  }
+
+  clickElement(e, handler) {
+  this.hidenTitle.innerHTML = "";
+
+  const children = e.target.children;
+  console.log(e)
+
+  if(children.length === 0) return;
+  const currTask = children[1].className.split(` `).at(1);
+
+  this.currentTask = currTask.toLowerCase();
+  handler(this.currentTask);
+  this.showTaskData();
   }
 
   showTaskData() {

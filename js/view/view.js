@@ -1,3 +1,4 @@
+
 export default class View {
   _spinner = document.querySelector(".animation-page");
   _msgBox = document.querySelector(".msg-box-page");
@@ -10,9 +11,7 @@ export default class View {
       const dataArr = [...new FormData(this._form)];
       const data = Object.fromEntries(dataArr);
       handler(data);
-      setTimeout(() => {
         this._inp.forEach((i) => (i.value = ""));
-      }, 1000);
     });
   }
 
@@ -50,6 +49,8 @@ export default class View {
   }
 
   renderTasks(tasks) {
+    const tasksLength = document.querySelector(`.tasks-length`)
+    tasksLength.innerHTML = tasks.length;
     this.parentTask.innerHTML = "";
     tasks.forEach((task) => {
       const formatClass = task.name.split(" ").join("_");

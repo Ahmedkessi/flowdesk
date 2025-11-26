@@ -170,7 +170,7 @@ export function addTask(data) {
   if (prevTask) return;
   categANDtask(data);
   status(task);
-  addStatus(task);
+
   addMonth(personData.data.tasks);
 
   function categANDtask(data) {
@@ -192,6 +192,19 @@ export function addTask(data) {
   });
 }
 
+
+function cleanStatusLists(task) {
+  const categories = ["notStarted", "inprocess", "completed"];
+
+  categories.forEach(cat => {
+    personData.data.Status[cat] = personData.data.Status[cat].filter(
+      t => t.name !== task.name
+    );
+  });
+}
+
+
+
 function status(task) {
   const dueDate = new Date(task.dueDate);
   const current = new Date(formatDate(currentDate()));
@@ -199,52 +212,23 @@ function status(task) {
     (dueDate - current) / (1000 * 60 * 60 * 24)
   );
 
-  //TYPES OF STATUS;
-  //inprocess:
-  if (remaininingDays <= 2 && remaininingDays > -1) {
-    task.Status = {
-      inprocess: true,
-      notStarted: false,
-      completed: false,
-    };
-  }
-
-  // not started:
-  if (remaininingDays >= 3) {
-    task.Status = {
-      inprocess: false,
-      notStarted: true,
-      completed: false,
-    };
-  }
-
-  // completed:
-  if (remaininingDays <= -1) {
-    task.Status = {
-      inprocess: false,
-      notStarted: false,
-      completed: true,
-    };
-  }
-
   task.remaininingDays = remaininingDays;
+
+  cleanStatusLists(task);
+
+  if (remaininingDays === 0) {
+    personData.data.Status[`inprocess`].push(task);
+    task.status = "inprocess";
+  } else if (remaininingDays >= 1) {
+    personData.data.Status[`notStarted`].push(task);
+    task.status = "notStarted";
+  } else {
+    personData.data.Status[`completed`].push(task);
+    task.status = "completed";
+  }
+
 }
 
-function addStatus(task) {
-  if (!task.Status) return;
-  const arr = Object.entries(task.Status);
-  const name = arr.flatMap((el) => {
-    return el;
-  });
-
-  const index = name.findIndex((el) => el === true) - 1;
-  const statusName = name[index];
-  task.status = statusName;
-  const status = personData.data.Status;
-  const prevTask = status[statusName].find((el) => el.name === task.name);
-  if (prevTask) return;
-  status[statusName].push(task);
-}
 
 function addMonth(tasks) {
   tasks.forEach((task) => {
@@ -276,20 +260,21 @@ function addMonth(tasks) {
     const prev = personData.data.month[currMonth]?.filter(
       (el) => el.name === task.name
     );
-
     if (prev.length > 0) {
       return;
     } else {
-      personData.data.month[currMonth].push(task);
+      /*personData.data.month[currMonth].push(task);*/
       task.month = currMonth;
+      personData.data.month[currMonth] = [...personData.data.month[currMonth], task]
     }
+
+   
   });
 }
 
 export function statusLoad() {
   personData.data.tasks.forEach((task) => {
     status(task);
-    addStatus(task);
   });
   personData.data.notifications = personData.data.Status.inprocess;
   levelUp(personData.data.categories);

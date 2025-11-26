@@ -13,7 +13,7 @@ class ProfileView extends View {
               <svg><use href="icons.svg#icon-profile"></use></svg>
               <div class="info__text">
                 <p class="info--title">Name</p>
-                <p class="info--name">${data.username}</p>
+                <p class="info--name">${data.username.split(` `).slice(0,3).join(` `)}</p>
               </div>
             </div>
 

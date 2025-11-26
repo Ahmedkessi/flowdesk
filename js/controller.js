@@ -10,6 +10,7 @@ import addTaskView from "./view/addTaskView.js";
 import { currentDate } from "./helper.js";
 import taskView from "./view/taskView.js";
 import SearchTaskView from "./view/SearchTaskView.js";
+import View from "./view/view.js";
 
 function initLoadingPage() {
   if (!module.personData.logged) {

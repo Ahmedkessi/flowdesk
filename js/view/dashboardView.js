@@ -1,39 +1,36 @@
 import View from "./view.js";
 
-    const date = new Date();
-    let hour = date.getHours();
-    let min = date.getMinutes();
-    let sec = date.getSeconds();
+const date = new Date();
+let hour = date.getHours();
+let min = date.getMinutes();
+let sec = date.getSeconds();
 
-    setInterval(() => {
-          sec += 1;
-          if(sec === 60) sec = 0;
-    }, 1000);
+setInterval(() => {
+  sec += 1;
+  if (sec === 60) sec = 0;
+}, 1000);
 
-    setInterval(() => {
-        if(min === 60) min = 0
-        if(sec === 0) min +=1;
-    }, 1000);
+setInterval(() => {
+  if (min === 60) min = 0;
+  if (sec === 0) min += 1;
+}, 1000);
 
-    setInterval(() => {
-        if(hour > 24) hour = 0
-        if(min === 0) hour +=1;
-    }, 1000 * 60);
+setInterval(() => {
+  if (hour > 24) hour = 0;
+  if (min === 0) hour += 1;
+}, 1000 * 60);
 
-    const timeWel = document.querySelector(`.welcome--time`)
-    const dayWel = document.querySelector(`.welcome--day`);
-    const guestName = document.querySelector(`.guest`)
+const timeWel = document.querySelector(`.welcome--time`);
+const dayWel = document.querySelector(`.welcome--day`);
+const guestName = document.querySelector(`.guest`);
 
-
-
-    setInterval(()=> {
-        timeWel.innerHTML = `
-        ${hour < 10 ? `0${hour}`:hour}:${min < 10 ? `0${min}`:min}:${sec < 10 ? `0${sec}`:sec} ${hour > 12 ? `pm` : `am`}
-        ` 
-      }, 1000);
-
-
-    
+setInterval(() => {
+  timeWel.innerHTML = `
+        ${hour < 10 ? `0${hour}` : hour}:${min < 10 ? `0${min}` : min}:${
+    sec < 10 ? `0${sec}` : sec
+  } ${hour > 12 ? `pm` : `am`}
+        `;
+}, 1000);
 
 class dashboardView extends View {
   parentEl = document.querySelector(".application");
@@ -52,9 +49,9 @@ class dashboardView extends View {
   currentMonth;
   monthData;
   parentMonth = document.querySelector(".transaction__items");
-  logout = document.querySelector('.logout');
-  _right = document.querySelector('.right-nav')
-  _logo = document.querySelector('.logo-app')
+  logout = document.querySelector(".logout");
+  _right = document.querySelector(".right-nav");
+  _logo = document.querySelector(".logo-app");
 
   renderNavigation(data, currentDate) {
     const currTime = `
@@ -70,13 +67,12 @@ class dashboardView extends View {
 
         <div class="user-intro">
           <img src="${data.image}" class="intro__user-image">
-          <p class="intro__user-name">${data.username}</p>
+          <p class="intro__user-name">${data.username.slice(0, 9)}...</p>
           <p class="intro__user-about">${data.about}</p>
         </div>
-        `
-    
-      
-    this._logo.insertAdjacentHTML("beforeend", currTime)
+        `;
+
+    this._logo.insertAdjacentHTML("beforeend", currTime);
     this._right.innerHTML = "";
     this._right.insertAdjacentHTML("afterbegin", rightNav);
 
@@ -84,7 +80,10 @@ class dashboardView extends View {
   }
 
   renderHeader(data, time) {
-    guestName.innerHTML = data.username+`!`;
+    const name = `${data.username.split(` `)[0]} ${
+      data.username.split(` `)[1]
+    }`;
+    guestName.innerHTML = name + `!`;
     dayWel.innerHTML = time;
   }
 
@@ -130,9 +129,8 @@ class dashboardView extends View {
   }
 
   renderTopCategories(data) {
-
     if (data.length < 1) return;
-    
+
     this._topCategory.innerHTML = "";
     data.forEach((category) => {
       const html = `
@@ -151,28 +149,45 @@ class dashboardView extends View {
   renderNewestTasks(tasks) {
     const header = document.querySelector(".tasks-header");
     const taskMain = document.querySelector(".tasks-main");
-    
+
     if (tasks.length < 1) return;
     header.innerHTML = "";
     taskMain.innerHTML = "";
-    
-    tasks.forEach((task) => {
+    const categoryName = [];
+
+    tasks.filter((task) => {
+      if (!categoryName.includes(task.category))
+        categoryName.push(task.category);
+    });
+
+    tasks.forEach((task, i) => {
+      const daysAgo = Math.abs(
+        Math.round(
+          (new Date() - new Date(task.createdTime)) / (1000 * 60 * 60 * 24)
+        )
+      );
+
       const htmlhead = `
-              <p class="category--header category--name">${task.category}</p>
+              ${
+                categoryName[i]
+                  ? `<p class="category--header category--name">${categoryName[i]}</p>`
+                  : ``
+              }
       `;
 
       const htmlTasks = `
                 <div class="item">
-                  <div class="task-color" style="border: .5rem solid ${task.color};"></div>
+                  <div class="task-color" style="border: .5rem solid ${
+                    task.color
+                  };"></div>
                   <p class="task-name">${task.name}</p>
                   <p class="task-status ${task.status}">${task.status}</p>
-                  <p class="task-date">${task.dueDate}</p>
-
-                  <div class="list-icon">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                  </div>
+                  <p class="task-date">${
+                    (daysAgo === 0 && `Today`) ||
+                    (daysAgo > 1 && `${daysAgo}days ago`) ||
+                    (daysAgo === 1 && `Yesterday`) ||
+                    `${daysAgo}`
+                  }</p>
                 </div>
       `;
       header.insertAdjacentHTML("afterbegin", htmlhead);
@@ -180,59 +195,87 @@ class dashboardView extends View {
     });
   }
 
-  renderTodayTasks(tasks){
+  renderTodayTasks(tasks) {
     const header = document.querySelector(".today-header");
     const taskMain = document.querySelector(".today-main");
-    
+
     if (tasks.length < 1) return;
     header.innerHTML = "";
     taskMain.innerHTML = "";
-    
-    tasks.forEach((task) => {
+    const categoryName = [];
+
+    tasks.filter((task) => {
+      if (!categoryName.includes(task.category))
+        categoryName.push(task.category);
+    });
+
+    tasks.forEach((task, i) => {
+      let minAgo = Math.abs(
+        Math.round((new Date() - new Date(task.createdTime)) / (1000 * 60))
+      );
+      let hourAgo = Math.abs(
+        Math.round((new Date() - new Date(task.createdTime)) / (1000 * 60 * 60))
+      );
+
       const htmlhead = `
-              <p class="category--header category--name">${task.category}</p>
+             ${
+               categoryName[i]
+                 ? `<p class="category--header category--name">${categoryName[i]}</p>`
+                 : ``
+             }
       `;
 
       const htmlTasks = `
                 <div class="item">
-                  <div class="task-color" style="border: .5rem solid ${task.color};"></div>
+                  <div class="task-color" style="border: .5rem solid ${
+                    task.color
+                  };"></div>
                   <p class="task-name">${task.name}</p>
                   <p class="task-status ${task.status}">${task.status}</p>
-                  <p class="task-date">${task.dueDate}</p>
-
-                  <div class="list-icon">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                  </div>
-                </div>
+                  <p class="task-date">${
+                    (hourAgo > 1 && `${hourAgo}hours ago`) ||
+                    (hourAgo === 1 && `${hourAgo}hour ago`) ||
+                    (minAgo > 0 && `${minAgo}min ago`) ||
+                    (minAgo === 0 && `now`)
+                  }</div>
       `;
+
       header.insertAdjacentHTML("afterbegin", htmlhead);
       taskMain.insertAdjacentHTML("beforeend", htmlTasks);
     });
   }
 
   renderStatus(status, tasks) {
-  const compeletedPer = Math.trunc((status["completed"].length / tasks.length) * 100);
-  const notStartPer = Math.trunc((status["notStarted"].length / tasks.length) * 100);
-  const inproPer = Math.trunc((status["inprocess"].length / tasks.length) * 100);
-    
-  const completed = `
+    const compeletedPer = Math.trunc(
+      (status["completed"].length / tasks.length) * 100
+    );
+    const notStartPer = Math.trunc(
+      (status["notStarted"].length / tasks.length) * 100
+    );
+    const inproPer = Math.trunc(
+      (status["inprocess"].length / tasks.length) * 100
+    );
+
+    const completed = `
     <div class="graph">
       <div class="graph__in-box">
         <svg><use href="icons.svg#icon-task"></use></svg>
         <p class="graph__num">${status["completed"].length}</p>
         <div class="track-box">
           <div class="graph-track">
-            <div class="track" style="width: ${compeletedPer >= 0 ? compeletedPer : 0}%;"></div>
+            <div class="track" style="width: ${
+              compeletedPer >= 0 ? compeletedPer : 0
+            }%;"></div>
           </div>
-          <div class="track-num">${compeletedPer >= 0 ? compeletedPer : 0}%</div>
+          <div class="track-num">${
+            compeletedPer >= 0 ? compeletedPer : 0
+          }%</div>
         </div>
       </div>
       <p class="graph__name">Completed</p>
     </div>
   `;
-      
+
     const notStarted = `
       <div class="graph">
         <div class="graph__in-box">
@@ -240,7 +283,9 @@ class dashboardView extends View {
           <p class="graph__num">${status["notStarted"].length}</p>
           <div class="track-box">
             <div class="graph-track">
-              <div class="track" style="width: ${notStartPer >= 0 ? notStartPer : 0}%;"></div>
+              <div class="track" style="width: ${
+                notStartPer >= 0 ? notStartPer : 0
+              }%;"></div>
             </div>
             <div class="track-num">${notStartPer >= 0 ? notStartPer : 0}%</div>
           </div>
@@ -256,7 +301,9 @@ class dashboardView extends View {
           <p class="graph__num">${status["inprocess"].length}</p>
           <div class="track-box">
             <div class="graph-track">
-              <div class="track" style="width: ${inproPer >= 0 ? inproPer : 0}%;"></div>
+              <div class="track" style="width: ${
+                inproPer >= 0 ? inproPer : 0
+              }%;"></div>
             </div>
             <div class="track-num">${inproPer >= 0 ? inproPer : 0}%</div>
           </div>
@@ -264,12 +311,12 @@ class dashboardView extends View {
         <p class="graph__name">Inprocess</p>
       </div>
     `;
-      
+
     const graphs = [completed, notStarted, Inprocess];
-    this._graph.innerHTML = '';
-    graphs.forEach(graph => {
+    this._graph.innerHTML = "";
+    graphs.forEach((graph) => {
       this._graph.insertAdjacentHTML("afterbegin", graph);
-    })
+    });
   }
 
   showNotifications(data) {
@@ -319,26 +366,25 @@ class dashboardView extends View {
       const currMonth = e.target.closest(".tr__date").classList[1];
 
       this.currentMonth = currMonth;
-      handler()
+      handler();
 
       if (this.monthData) {
-        this.renderTasks(this.monthData)
+        this.renderTasks(this.monthData);
       }
- 
 
       const html = `
       <p class="page__heading">Month (${currMonth})</p>
       <p class="page__text">Total: <span>${this.monthData.length}</span></p>
-      `
-      this.hidenTitle.innerHTML = '';
-      this.hidenTitle.insertAdjacentHTML('afterbegin', html)
+      `;
+      this.hidenTitle.innerHTML = "";
+      this.hidenTitle.insertAdjacentHTML("afterbegin", html);
     });
   }
 
   logoutApp(handler) {
-    this.logout.addEventListener('click', () => {
+    this.logout.addEventListener("click", () => {
       handler();
-    })
+    });
   }
 }
 
